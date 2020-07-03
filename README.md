@@ -2,6 +2,6 @@
 
 This is a simple Egg Timer developed using flutter.
 
-## ⭕🛑 UNDER DEVELOPEMENT ⭕🛑
+## ⭕🛑 UNDER DEVELOPEMENT 🛑⭕
 
 This project is still under development
