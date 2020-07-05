@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:egg_timer/clock_main_interface.dart';
 import 'package:flutter/material.dart';
 
 import 'core/colours.dart';
@@ -22,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   route() {
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => Container()));
+        context, MaterialPageRoute(builder: (context) => ClcokMainInterface()));
   }
 
   @override

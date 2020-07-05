@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Egg Timer',
-      theme: theme_data,
+      theme: themeData,
       home: SplashScreen(),
     );
   }
