@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'egg_timer_button.dart';
+import 'egg_timer_display.dart';
+
 class ClcokMainInterface extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -12,19 +15,18 @@ class ClcokMainInterface extends StatelessWidget {
           children: <Widget>[
             // Timer
             SizedBox(
-              width: _width,
-              height: _height / 4,
-              child: Container(
-                color: Colors.red,
-              ),
+              height: _height / 3.5,
+              child: EggTimerDisplay(height: _height),
             ),
-
             // Clock
             SizedBox(
               child: Container(
                 color: Colors.blueAccent,
                 child: Padding(
-                  padding: EdgeInsets.all(30.0),
+                  padding: EdgeInsets.only(
+                    right: _width / 15.0,
+                    left: _width / 15.0,
+                  ),
                   child: AspectRatio(
                     aspectRatio: 1.0,
                     child: Container(
@@ -39,21 +41,12 @@ class ClcokMainInterface extends StatelessWidget {
             Expanded(child: Container()),
 
             // 2 Rows of Controlers
-            SizedBox(
-              height: _height / 12,
-              child: Container(
-                color: Colors.green,
-              ),
-            ),
-            SizedBox(
-              height: _height / 12,
-              child: Container(
-                color: Colors.greenAccent,
-              ),
-            ),
+            EggTimerControls(height: _height, width: _width),
           ],
         ),
       ),
     );
   }
 }
+
+

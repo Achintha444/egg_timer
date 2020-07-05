@@ -6,5 +6,10 @@ var themeData = ThemeData(
   accentColor: ACCENT_COLOUR,
   errorColor: Color(0xffde483e),
   cursorColor: Color(0xff737373),
-  scaffoldBackgroundColor: MAIN_COLOUR,
+  scaffoldBackgroundColor: ACCENT_COLOUR.withOpacity(0.999),
+  fontFamily: 'FjallaOne',
+  buttonTheme: ButtonThemeData(
+    buttonColor: MAIN_COLOUR,
+    splashColor: ACCENT_COLOUR,
+  ),
 );
