@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'egg_timer_button.dart';
+
 class EggTimerControls extends StatelessWidget {
   const EggTimerControls({
     Key key,

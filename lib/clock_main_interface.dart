@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'egg_timer_button.dart';
+import 'egg_timer_controls.dart';
 import 'egg_timer_display.dart';
 
 class ClcokMainInterface extends StatelessWidget {
