@@ -12,10 +12,9 @@ class ArrowPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.save();
-
+    //canvas.save();
     canvas.translate(size.width / 2, 0.0);
-
+    //canvas.restore();
     Path path = new Path();
     path.moveTo(3.0, -12.0);
     path.lineTo(13, 0.4);
