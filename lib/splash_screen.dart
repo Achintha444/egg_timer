@@ -53,8 +53,10 @@ class _SplashScreenState extends State<SplashScreen> {
               style: TextStyle(
                 color: THIRD_COLOUR,
                 decoration: TextDecoration.none,
-                letterSpacing: 5,
+                letterSpacing: 10,
+                fontFamily: 'FjallaOne',
               ),
+              
             ),
             Padding(
               padding: EdgeInsets.only(bottom: _height / 22),

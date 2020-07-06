@@ -55,12 +55,25 @@ class TickPainter extends CustomPainter {
   final tickPerSection;
   final ticksInset;
   final tickPaint;
+  final textPainter;
+  final textStyle;
 
   TickPainter({
     this.tickCount = 35,
     this.tickPerSection = 5,
     this.ticksInset = 0.0,
-  }) : tickPaint = new Paint() {
+  })  : tickPaint = new Paint(),
+        textPainter = new TextPainter(
+          textAlign: TextAlign.center,
+          textDirection: TextDirection.ltr,
+        ),
+        textStyle = TextStyle(
+          color: THIRD_COLOUR,
+          fontSize: 20,
+          fontFamily: 'FjallaOne',
+          fontWeight: FontWeight.bold,
+          letterSpacing: -1.2
+        ) {
     tickPaint.color = THIRD_COLOUR;
     tickPaint.strokeWidth = 1.0;
   }
@@ -82,7 +95,32 @@ class TickPainter extends CustomPainter {
         tickPaint,
       );
 
+      if (i % tickPerSection == 0) {
+        // paint the text
+        canvas.save();
+        canvas.translate(0.0, -(size.width / 2) - 30.0);
+
+        textPainter.text = new TextSpan(
+          text: '$i',
+          style: textStyle,
+        );
+
+        // layout the text
+        textPainter.layout();
+
+        textPainter.paint(
+          canvas,
+          new Offset(
+            -textPainter.width / 2,
+            -textPainter.height/2,
+          ),
+        );
+
+        canvas.restore();
+      }
+      
       canvas.rotate(2 * math.pi / 35);
+      
     }
   }
 
