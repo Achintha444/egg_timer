@@ -68,12 +68,11 @@ class TickPainter extends CustomPainter {
           textDirection: TextDirection.ltr,
         ),
         textStyle = TextStyle(
-          color: THIRD_COLOUR,
-          fontSize: 20,
-          fontFamily: 'FjallaOne',
-          fontWeight: FontWeight.bold,
-          letterSpacing: -1.2
-        ) {
+            color: THIRD_COLOUR,
+            fontSize: 20,
+            fontFamily: 'FjallaOne',
+            fontWeight: FontWeight.bold,
+            letterSpacing: -1.2) {
     tickPaint.color = THIRD_COLOUR;
     tickPaint.strokeWidth = 1.0;
   }
@@ -112,15 +111,14 @@ class TickPainter extends CustomPainter {
           canvas,
           new Offset(
             -textPainter.width / 2,
-            -textPainter.height/2,
+            -textPainter.height / 2,
           ),
         );
 
         canvas.restore();
       }
-      
+
       canvas.rotate(2 * math.pi / 35);
-      
     }
   }
 
