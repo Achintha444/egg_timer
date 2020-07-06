@@ -28,7 +28,7 @@ class EggTimerDial extends StatelessWidget {
           // Dialer Knob
           Container(
             child: Padding(
-              padding: const EdgeInsets.all(65.0),
+              padding: const EdgeInsets.all(55.0),
               child: EggTimerDialKnob(height: _height),
             ),
           ),
@@ -36,6 +36,7 @@ class EggTimerDial extends StatelessWidget {
           Container(
             height: double.infinity,
             width: double.infinity,
+            padding: EdgeInsets.all(50),
             child: CustomPaint(
               painter: new TickPainter(),
             ),
@@ -76,8 +77,8 @@ class TickPainter extends CustomPainter {
       final tickeLength = i % tickPerSection == 0 ? LONG_TICK : SHORT_TICK;
 
       canvas.drawLine(
-        new Offset(0.0, radius),
-        new Offset(0.0, radius - tickeLength),
+        new Offset(0.0, -radius),
+        new Offset(0.0, -radius - tickeLength),
         tickPaint,
       );
 

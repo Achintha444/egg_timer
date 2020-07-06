@@ -59,7 +59,10 @@ class _SplashScreenState extends State<SplashScreen> {
             Padding(
               padding: EdgeInsets.only(bottom: _height / 22),
             ),
-            CircularProgressIndicator(),
+            CircularProgressIndicator(
+              backgroundColor: Color.fromARGB(0, 0, 0, 0),
+              valueColor: AlwaysStoppedAnimation<Color>(THIRD_COLOUR)
+            ),
           ],
         ),
       ),
