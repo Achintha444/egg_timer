@@ -31,7 +31,7 @@ class EggTimerButton extends StatelessWidget {
       height: double.infinity,
       child: FlatButton(
         //elevation: 0,
-        color: _color,
+        color: _color.withOpacity(0.5),
         onPressed: _function,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
