@@ -19,7 +19,7 @@ class EggTimerControls extends StatelessWidget {
         SizedBox(
           height: _height / 10,
           child: Padding(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.only(bottom:8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -50,16 +50,17 @@ class EggTimerControls extends StatelessWidget {
         ),
         SizedBox(
           height: _height / 10,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
+          //child: Padding(
+            //padding: const EdgeInsets.all(8.0),
             child: EggTimerButton(
               width: _width,
               height: _height,
               icon: Icons.pause,
               text: 'Pause',
+              color: Theme.of(context).primaryColor,
               function: () {},
             ),
-          ),
+          //),
         ),
       ],
     );

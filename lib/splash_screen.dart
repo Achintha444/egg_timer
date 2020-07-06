@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Container(
       height: _height,
       width: _width,
-      color: THIRD_COLOUR,
+      color: Theme.of(context).accentColor,
       child: new Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -51,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
               'EGG TIMER'.toUpperCase(),
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Theme.of(context).primaryColor,
+                color: THIRD_COLOUR,
                 decoration: TextDecoration.none,
                 letterSpacing: 5,
               ),

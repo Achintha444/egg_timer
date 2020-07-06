@@ -31,14 +31,14 @@ var circleGradient = RadialGradient(
 
 var mainShadow = BoxShadow(
   color: THIRD_COLOUR.withOpacity(0.5),
-  blurRadius: 3,
-  spreadRadius: 3,
+  blurRadius: 2,
+  spreadRadius: 2,
   offset: Offset(0, 1),
 );
 
 var subShadow = BoxShadow(
   color: THIRD_COLOUR.withOpacity(0.5),
   blurRadius: 2,
-  spreadRadius: 2,
+  spreadRadius: 1,
   offset: Offset(0, 1),
 );
