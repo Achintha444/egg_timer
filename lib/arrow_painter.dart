@@ -1,24 +1,28 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'core/colours.dart';
 
 class ArrowPainter extends CustomPainter {
   final Paint dialArrowPaint;
+  final double rotationPercent;
 
-  ArrowPainter() : dialArrowPaint = new Paint() {
+  ArrowPainter({@required this.rotationPercent}) : dialArrowPaint = new Paint() {
     dialArrowPaint.color = THIRD_COLOUR;
     dialArrowPaint.style = PaintingStyle.fill;
   }
 
   @override
   void paint(Canvas canvas, Size size) {
-    //canvas.save();
-    canvas.translate(size.width / 2, 0.0);
+    final double radius = size.height/2;
+    canvas.translate(radius,radius);
+    canvas.rotate(2*pi*rotationPercent);
     //canvas.restore();
     Path path = new Path();
-    path.moveTo(0.0, -12.0);
-    path.lineTo(13, 0.4);
-    path.lineTo(-13, 0.4);
+    path.moveTo(0.0, -radius-12.0);
+    path.lineTo(9, -radius+0.4);
+    path.lineTo(-9, -radius+0.4);
     path.close();
 
     canvas.drawPath(path, dialArrowPaint);

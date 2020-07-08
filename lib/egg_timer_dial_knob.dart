@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'arrow_painter.dart';
@@ -5,12 +7,14 @@ import 'core/colours.dart';
 import 'core/theme_data.dart';
 
 class EggTimerDialKnob extends StatefulWidget {
-  const EggTimerDialKnob({
-    Key key,
-    @required double height,
-  }) : _height = height, super(key: key);
+  const EggTimerDialKnob(
+      {Key key, @required double height, @required double rotationPercent})
+      : _height = height,
+        _rotationPercent = rotationPercent,
+        super(key: key);
 
   final double _height;
+  final double _rotationPercent;
 
   @override
   _EggTimerDialKnobState createState() => _EggTimerDialKnobState();
@@ -33,9 +37,13 @@ class _EggTimerDialKnobState extends State<EggTimerDialKnob> {
             ),
           ),
           child: Center(
-            child: Image(
-              image: AssetImage('assets/circle.png'),
-              height: widget._height / 7,
+            child: Transform(
+              transform: Matrix4.rotationZ(2*pi*widget._rotationPercent),
+              alignment: Alignment.center,
+              child: Image(
+                image: AssetImage('assets/circle.png'),
+                height: widget._height / 7,
+              ),
             ),
           ),
         ),
@@ -45,7 +53,9 @@ class _EggTimerDialKnobState extends State<EggTimerDialKnob> {
           width: double.infinity,
           height: double.infinity,
           child: CustomPaint(
-            painter: new ArrowPainter(),
+            painter: new ArrowPainter(
+              rotationPercent: widget._rotationPercent,
+            ),
           ),
         ),
       ],
