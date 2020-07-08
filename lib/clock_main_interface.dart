@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 
 import 'core/theme_data.dart';
+import 'egg_timer.dart';
 import 'egg_timer_controls.dart';
 import 'egg_timer_dial.dart';
 import 'egg_timer_display.dart';
 
 class ClcokMainInterface extends StatelessWidget {
+  ClcokMainInterface()
+      : _eggTimer = new EggTimer(
+          maxTime: Duration(minutes: 35),
+        );
+
+  final EggTimer _eggTimer;
+
   @override
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
@@ -35,7 +43,11 @@ class ClcokMainInterface extends StatelessWidget {
                     ),
                     child: AspectRatio(
                       aspectRatio: 1.0,
-                      child: EggTimerDial(height: _height),
+                      child: EggTimerDial(
+                        height: _height,
+                        maxTime: _eggTimer.getMaxTime,
+                        currentTime: _eggTimer.getCurrentTime,
+                      ),
                     ),
                   ),
                 ),
