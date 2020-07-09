@@ -16,8 +16,10 @@ class ArrowPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final double radius = size.height/2;
+    //canvas.save();
     canvas.translate(radius,radius);
     canvas.rotate(2*pi*rotationPercent);
+    //canvas.restore();
     //canvas.restore();
     Path path = new Path();
     path.moveTo(0.0, -radius-12.0);

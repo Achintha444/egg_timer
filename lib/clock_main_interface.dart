@@ -1,3 +1,4 @@
+import 'package:egg_timer/radial_gesture_detector.dart';
 import 'package:flutter/material.dart';
 
 import 'core/theme_data.dart';
@@ -6,7 +7,7 @@ import 'egg_timer_controls.dart';
 import 'egg_timer_dial.dart';
 import 'egg_timer_display.dart';
 
-class ClcokMainInterface extends StatelessWidget {
+class ClcokMainInterface extends StatefulWidget {
   ClcokMainInterface()
       : _eggTimer = new EggTimer(
           maxTime: Duration(minutes: 35),
@@ -14,6 +15,11 @@ class ClcokMainInterface extends StatelessWidget {
 
   final EggTimer _eggTimer;
 
+  @override
+  _ClcokMainInterfaceState createState() => _ClcokMainInterfaceState();
+}
+
+class _ClcokMainInterfaceState extends State<ClcokMainInterface> {
   @override
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
@@ -34,24 +40,31 @@ class ClcokMainInterface extends StatelessWidget {
               ),
 
               // Clock
-              SizedBox(
-                child: Container(
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      right: _width / 15.0,
-                      left: _width / 15.0,
-                    ),
-                    child: AspectRatio(
-                      aspectRatio: 1.0,
-                      child: EggTimerDial(
-                        height: _height,
-                        maxTime: _eggTimer.getMaxTime,
-                        currentTime: _eggTimer.getCurrentTime,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              RadialGestureDetector(
+                  height: _height,
+                  width: _width,
+                  eggTimer: widget._eggTimer,
+                  onTimeSelected: this._onTimeSelected),
+              // SizedBox(
+              //   height: _height / 2.2,
+              //   child: Container(
+              //     child: Padding(
+              //       padding: EdgeInsets.only(
+              //         right: _width / 15.0,
+              //         left: _width / 15.0,
+              //       ),
+              //       child: AspectRatio(
+              //         aspectRatio: 1.0,
+              //         child: EggTimerDial(
+              //           height: _height,
+              //           maxTime: widget._eggTimer.getMaxTime,
+              //           currentTime: widget._eggTimer.getCurrentTime,
+              //           onTimeSelected: this._onTimeSelected,
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
 
               // Expanded Block
               Expanded(child: Container()),
@@ -63,5 +76,11 @@ class ClcokMainInterface extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _onTimeSelected(Duration newTime) {
+    setState(() {
+      widget._eggTimer.setCurrentTime = newTime;
+    });
   }
 }

@@ -36,9 +36,9 @@ class TickPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    //canvas.save();
     canvas.translate(size.width / 2, size.height / 2);
-
-    canvas.save();
+    //canvas.restore();
 
     final radius = size.width / 2;
 
@@ -71,11 +71,13 @@ class TickPainter extends CustomPainter {
             -textPainter.height / 2,
           ),
         );
-
         canvas.restore();
       }
 
+      //canvas.restore();
+      //canvas.save();
       canvas.rotate(2 * math.pi / 35);
+      //canvas.restore();
     }
   }
 
