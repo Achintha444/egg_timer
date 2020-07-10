@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'core/radial_gesture_detector_model.dart';
@@ -5,22 +7,25 @@ import 'egg_timer.dart';
 import 'egg_timer_dial.dart';
 
 class RadialGestureDetector extends StatefulWidget {
-  RadialGestureDetector(
-      {Key key,
-      @required double height,
-      @required double width,
-      @required EggTimer eggTimer,
-      @required Function onTimeSelected})
-      : _height = height,
+  RadialGestureDetector({
+    Key key,
+    @required double height,
+    @required double width,
+    @required EggTimer eggTimer,
+    @required Function onTimeSelected,
+    @required Function onDialStopTurning,
+  })  : _height = height,
         _width = width,
         _eggTimer = eggTimer,
         _onTimeSelected = onTimeSelected,
+        _onDialStopTurning = onDialStopTurning,
         super(key: key);
 
   double _height;
   double _width;
   EggTimer _eggTimer;
   Function _onTimeSelected;
+  Function _onDialStopTurning;
 
   @override
   _RadialGestureDetectorState createState() => _RadialGestureDetectorState();
@@ -30,6 +35,10 @@ class _RadialGestureDetectorState extends State<RadialGestureDetector> {
   @override
   Widget build(BuildContext context) {
     return DialTurnGesutureDetector(
+      currentTime: widget._eggTimer.getCurrentTime,
+      maxTime: widget._eggTimer.getMaxTime,
+      onTimeSelected: widget._onTimeSelected,
+      onDialStopTurning: widget._onDialStopTurning,
       child: SizedBox(
         height: widget._height / 2.2,
         child: Container(
@@ -55,10 +64,25 @@ class _RadialGestureDetectorState extends State<RadialGestureDetector> {
 }
 
 class DialTurnGesutureDetector extends StatefulWidget {
-  final child;
+  const DialTurnGesutureDetector({
+    Key key,
+    @required child,
+    @required Duration currentTime,
+    @required Duration maxTime,
+    @required Function onTimeSelected,
+    @required Function onDialStopTurning,
+  })  : _child = child,
+        _currentTime = currentTime,
+        _maxTime = maxTime,
+        _onTimeSelected = onTimeSelected,
+        _onDialStopTurning = onDialStopTurning,
+        super(key: key);
 
-  const DialTurnGesutureDetector({Key key, @required this.child})
-      : super(key: key);
+  final Duration _currentTime;
+  final Duration _maxTime;
+  final Function _onTimeSelected;
+  final Function _onDialStopTurning;
+  final _child;
 
   @override
   _DialTurnGesutureDetectorState createState() =>
@@ -66,13 +90,35 @@ class DialTurnGesutureDetector extends StatefulWidget {
 }
 
 class _DialTurnGesutureDetectorState extends State<DialTurnGesutureDetector> {
-  _onRadialDragStart(PolarCoord startCoord) {}
+  PolarCoord startDragCoord;
+  Duration startDragTime;
+  Duration selectedTime;
 
-  _onRadialDragUpdate(PolarCoord updateCoord) {
-    print ('$updateCoord');
+  _onRadialDragStart(PolarCoord startCoord) {
+    startDragCoord = startCoord;
+    startDragTime = widget._currentTime;
   }
 
-  _onRadialDragEnd() {}
+  _onRadialDragUpdate(PolarCoord updateCoord) {
+    if (startDragCoord != null) {
+      final angelDiff = updateCoord.angle - startDragCoord.angle;
+      final angelPercent = angelDiff / (2 * pi);
+      final timeDiffInSeconds =
+          (angelPercent * widget._maxTime.inSeconds).round();
+      selectedTime =
+          Duration(seconds: startDragTime.inSeconds + timeDiffInSeconds);
+      print('new time ${selectedTime.inMinutes}');
+      widget._onTimeSelected(selectedTime);
+    }
+    print('$updateCoord');
+  }
+
+  _onRadialDragEnd() {
+    widget._onDialStopTurning(selectedTime);
+    startDragCoord = null;
+    startDragTime = null;
+    selectedTime = null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +126,7 @@ class _DialTurnGesutureDetectorState extends State<DialTurnGesutureDetector> {
       onRadialDragStart: _onRadialDragStart,
       onRadialDragUpdate: _onRadialDragUpdate,
       onRadialDragEnd: _onRadialDragEnd,
-      child: widget.child,
+      child: widget._child,
     );
   }
 }
