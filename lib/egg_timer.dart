@@ -17,6 +17,7 @@ class EggTimer {
   set setCurrentTime(newTime) {
     if (this._state == EggTimerState.ready) {
       this._currentTime = newTime;
+      this._lastStartTime = this._currentTime;
     }
   }
 
@@ -29,9 +30,18 @@ class EggTimer {
     return this._currentTime;
   }
 
+  get getLastStartTime {
+    //return Duration(minutes: 33);
+    return this._lastStartTime;
+  }
+
+  get getState{
+    return this._state;
+  }
+
   resume() {
     this._state = EggTimerState.running;
-    this._lastStartTime = this._currentTime;
+    
     stopwatch.start();
     this._tick();
   }

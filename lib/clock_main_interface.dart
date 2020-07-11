@@ -13,10 +13,10 @@ class ClcokMainInterface extends StatefulWidget {
 
 class _ClcokMainInterfaceState extends State<ClcokMainInterface> {
   EggTimer _eggTimer;
-  _ClcokMainInterfaceState(){
+  _ClcokMainInterfaceState() {
     _eggTimer = new EggTimer(
-          maxTime: Duration(minutes: 35),
-          onTimeUpdated: this._onTimerUpdated,
+      maxTime: Duration(minutes: 35),
+      onTimeUpdated: this._onTimerUpdated,
     );
   }
 
@@ -36,7 +36,12 @@ class _ClcokMainInterfaceState extends State<ClcokMainInterface> {
               // Timer
               SizedBox(
                 height: _height / 3.5,
-                child: EggTimerDisplay(height: _height),
+                child: EggTimerDisplay(
+                  height: _height,
+                  eggTimerState: _eggTimer.getState,
+                  countDownTime: _eggTimer.getCurrentTime,
+                  selectionTime: _eggTimer.getLastStartTime,
+                ),
               ),
 
               // Clock
