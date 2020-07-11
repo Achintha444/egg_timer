@@ -2,6 +2,10 @@
 
 This is a simple Egg Timer developed using flutter.
 
-## ⭕🛑 UNDER DEVELOPEMENT 🛑⭕
+# Interface of the app
+<image src = 'assets/untitled.gif' height = '500'>
 
-This project is still under development
+
+## ⭕ PS 
+
+This project may still contain bugs, therefore if you find any please feel free to create a pull request about it.
