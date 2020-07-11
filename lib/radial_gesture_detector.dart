@@ -101,7 +101,7 @@ class _DialTurnGesutureDetectorState extends State<DialTurnGesutureDetector> {
 
   _onRadialDragUpdate(PolarCoord updateCoord) {
     if (startDragCoord != null) {
-      final angelDiff = updateCoord.angle - startDragCoord.angle;
+      final angelDiff = _makeAnglePositive(updateCoord.angle - startDragCoord.angle);
       final angelPercent = angelDiff / (2 * pi);
       final timeDiffInSeconds =
           (angelPercent * widget._maxTime.inSeconds).round();
@@ -111,6 +111,10 @@ class _DialTurnGesutureDetectorState extends State<DialTurnGesutureDetector> {
       widget._onTimeSelected(selectedTime);
     }
     print('$updateCoord');
+  }
+
+  double _makeAnglePositive(double angle) {
+    return angle >= 0.0 ? angle : angle + (2 * pi);
   }
 
   _onRadialDragEnd() {
