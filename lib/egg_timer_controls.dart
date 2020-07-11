@@ -11,8 +11,8 @@ class EggTimerControls extends StatefulWidget {
     @required EggTimerState eggTimerState,
     @required Function onPaused,
     @required Function onResume,
-    Function onRestart,
-    Function onReset,
+    @required Function onRestart,
+    @required Function onReset,
   })  : _height = height,
         _width = width,
         _eggTimerState = eggTimerState,
@@ -40,7 +40,8 @@ class _EggTimerControlsState extends State<EggTimerControls> {
     return Column(
       children: <Widget>[
         AnimatedOpacity(
-          opacity: 1,
+          opacity: widget._eggTimerState == EggTimerState.paused ? 1 : 0,
+          curve: Curves.decelerate,
           duration: Duration(milliseconds: 450),
           child: SizedBox(
             height: widget._height / 10,
@@ -55,7 +56,7 @@ class _EggTimerControlsState extends State<EggTimerControls> {
                       height: widget._height,
                       icon: Icons.refresh,
                       text: 'Restart',
-                      function: () {},
+                      function: widget._onRestart,
                     ),
                   ),
                   Padding(
@@ -67,7 +68,7 @@ class _EggTimerControlsState extends State<EggTimerControls> {
                       height: widget._height,
                       icon: Icons.arrow_back,
                       text: 'Reset',
-                      function: () {},
+                      function: widget._onReset,
                     ),
                   ),
                 ],
@@ -76,7 +77,7 @@ class _EggTimerControlsState extends State<EggTimerControls> {
           ),
         ),
         AnimatedOpacity(
-          opacity: 1,
+          opacity: widget._eggTimerState == EggTimerState.ready ? 0 : 1,
           duration: Duration(milliseconds: 550),
           child: SizedBox(
             height: widget._height / 10,

@@ -71,6 +71,16 @@ class _ClcokMainInterfaceState extends State<ClcokMainInterface> {
                     _eggTimer.resume();
                   });
                 },
+                onReset: () {
+                  setState(() {
+                    _eggTimer.reset();
+                  });
+                },
+                onRestart: () {
+                  setState(() {
+                    _eggTimer.restart();
+                  });
+                },
               ),
             ],
           ),

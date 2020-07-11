@@ -59,6 +59,30 @@ class EggTimer {
     }
   }
 
+  restart() {
+    if(this._state == EggTimerState.paused){
+      this._state = EggTimerState.running;
+      this._currentTime = this._lastStartTime;
+      stopwatch.reset();
+      stopwatch.start();
+
+      _tick();
+    }
+  }
+
+  reset() {
+    if (this._state == EggTimerState.paused) {
+      this._state = EggTimerState.ready;
+      this._currentTime = Duration(seconds: 0);
+      this._lastStartTime = this._currentTime;
+      stopwatch.reset();
+    }
+
+    if (this._onTimeUpdated != null) {
+      this._onTimeUpdated();
+    }
+  }
+
   _tick() {
     print("Current Time " + this._currentTime.toString());
     _currentTime = _lastStartTime - stopwatch.elapsed;
