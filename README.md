@@ -2,9 +2,8 @@
 
 This is a simple Egg Timer developed using flutter.
 
-# Interface of the app
-<image src = 'assets/untitled.gif' height = '500'>
-
+# Interface of the app 🐱‍👤👨‍💻👩‍💻
+<image src = 'assets/interfaces/untitled.gif' height = '500'>
 
 ## ⭕ PS 
 
