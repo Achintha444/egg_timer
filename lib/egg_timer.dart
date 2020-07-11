@@ -41,6 +41,10 @@ class EggTimer {
 
   resume() {
     if (this._state != EggTimerState.running) {
+      if (this._state == EggTimerState.ready){
+        this._currentTime = this._roundToTheNearestMinute(this._currentTime);
+        this._lastStartTime = this._currentTime;
+      }
       this._state = EggTimerState.running;
 
       stopwatch.start();
@@ -81,6 +85,12 @@ class EggTimer {
     if (this._onTimeUpdated != null) {
       this._onTimeUpdated();
     }
+  }
+
+  Duration _roundToTheNearestMinute(Duration duration){
+      return new Duration(
+        minutes: (duration.inSeconds/60).round(),
+      );
   }
 
   _tick() {
