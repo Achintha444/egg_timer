@@ -61,6 +61,16 @@ class _ClcokMainInterfaceState extends State<ClcokMainInterface> {
                 height: _height,
                 width: _width,
                 eggTimerState: _eggTimer.getState,
+                onPaused: () {
+                  setState(() {
+                    _eggTimer.pause();
+                  });
+                },
+                onResume: () {
+                  setState(() {
+                    _eggTimer.resume();
+                  });
+                },
               ),
             ],
           ),

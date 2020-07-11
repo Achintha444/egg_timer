@@ -35,18 +35,29 @@ class EggTimer {
     return this._lastStartTime;
   }
 
-  get getState{
+  get getState {
     return this._state;
   }
 
   resume() {
-    this._state = EggTimerState.running;
-    
-    stopwatch.start();
-    this._tick();
+    if (this._state != EggTimerState.running) {
+      this._state = EggTimerState.running;
+
+      stopwatch.start();
+      this._tick();
+    }
   }
 
-  pause() {}
+  pause() {
+    if (this._state == EggTimerState.running) {
+      this._state = EggTimerState.paused;
+      stopwatch.stop();
+
+      if (this._onTimeUpdated != null) {
+        this._onTimeUpdated();
+      }
+    }
+  }
 
   _tick() {
     print("Current Time " + this._currentTime.toString());
@@ -67,5 +78,6 @@ class EggTimer {
 enum EggTimerState {
   ready,
   running,
+  paused,
   stop,
 }

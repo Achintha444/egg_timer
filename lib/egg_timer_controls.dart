@@ -9,14 +9,26 @@ class EggTimerControls extends StatefulWidget {
     @required double height,
     @required double width,
     @required EggTimerState eggTimerState,
+    @required Function onPaused,
+    @required Function onResume,
+    Function onRestart,
+    Function onReset,
   })  : _height = height,
         _width = width,
         _eggTimerState = eggTimerState,
+        _onPaused = onPaused,
+        _onResume = onResume,
+        _onRestart = onRestart,
+        _onReset = onReset,
         super(key: key);
 
   final double _height;
   final double _width;
   final EggTimerState _eggTimerState;
+  final Function _onPaused;
+  final Function _onResume;
+  final Function _onRestart;
+  final Function _onReset;
 
   @override
   _EggTimerControlsState createState() => _EggTimerControlsState();
@@ -77,10 +89,12 @@ class _EggTimerControlsState extends State<EggTimerControls> {
                   ? Icons.pause
                   : Icons.play_arrow,
               text: widget._eggTimerState == EggTimerState.running
-                  ?'Pause':
-                  'Resume',
+                  ? 'Pause'
+                  : 'Resume',
               color: Theme.of(context).primaryColor,
-              function: () {},
+              function: widget._eggTimerState == EggTimerState.running
+                  ? widget._onPaused
+                  : widget._onResume,
             ),
             //),
           ),
