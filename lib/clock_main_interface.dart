@@ -57,7 +57,11 @@ class _ClcokMainInterfaceState extends State<ClcokMainInterface> {
               Expanded(child: Container()),
 
               // 2 Rows of Controlers
-              EggTimerControls(height: _height, width: _width),
+              EggTimerControls(
+                height: _height,
+                width: _width,
+                eggTimerState: _eggTimer.getState,
+              ),
             ],
           ),
         ),

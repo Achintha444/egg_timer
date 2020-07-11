@@ -1,5 +1,7 @@
-import 'package:egg_timer/egg_timer.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
+
+import 'egg_timer.dart';
 
 class EggTimerDisplay extends StatefulWidget {
   const EggTimerDisplay({
@@ -24,26 +26,24 @@ class EggTimerDisplay extends StatefulWidget {
 }
 
 class _EggTimerDisplayState extends State<EggTimerDisplay> {
-  
-  //final DateFormat
-  
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Transform(
-          transform: Matrix4.translationValues(
-            0.0,
-            widget._eggTimerState == EggTimerState.ready ? 0.0 : -200.0,
-            0.0,
-          ),
+        AnimatedOpacity(
+          opacity: widget._eggTimerState == EggTimerState.ready ? 1.0 : 0.0,
+          duration: Duration(milliseconds: 450),
+          curve: Curves.decelerate,
           child: Center(
             child: Padding(
               padding: EdgeInsets.only(
                 top: widget._height / 35,
               ),
               child: new Text(
-                '${widget._selectionTime.inMinutes}',
+                formatDate(
+                    DateTime(
+                        2020, 01, 01, 01, 00, widget._selectionTime.inSeconds),
+                    [nn]),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: widget._height / 6,
@@ -53,15 +53,21 @@ class _EggTimerDisplayState extends State<EggTimerDisplay> {
             ),
           ),
         ),
-        Opacity(
+        AnimatedOpacity(
           opacity: widget._eggTimerState != EggTimerState.ready ? 1.0 : 0.0,
+          duration: Duration(milliseconds: 550),
+          curve: Curves.decelerate,
           child: Center(
             child: Padding(
               padding: EdgeInsets.only(
                 top: widget._height / 35,
               ),
               child: new Text(
-                '${widget._countDownTime.inMinutes}:${widget._countDownTime.inSeconds-widget._countDownTime.inMinutes*60}',
+                formatDate(
+                    DateTime(
+                        2020, 1, 1, 1, 00, widget._countDownTime.inSeconds),
+                    [nn, ':', ss]),
+                // '${widget._countDownTime.inMinutes}:${widget._countDownTime.inSeconds-widget._countDownTime.inMinutes*60}',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: widget._height / 6,
